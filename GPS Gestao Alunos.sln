@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GPS Gestao Alunos", "GPS Gestao Alunos\GPS Gestao Alunos.vcxproj", "{B77F6AFE-2CEC-4E97-8849-496BF711FC12}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B77F6AFE-2CEC-4E97-8849-496BF711FC12}.Debug|x64.ActiveCfg = Debug|x64
+		{B77F6AFE-2CEC-4E97-8849-496BF711FC12}.Debug|x64.Build.0 = Debug|x64
+		{B77F6AFE-2CEC-4E97-8849-496BF711FC12}.Debug|x86.ActiveCfg = Debug|Win32
+		{B77F6AFE-2CEC-4E97-8849-496BF711FC12}.Debug|x86.Build.0 = Debug|Win32
+		{B77F6AFE-2CEC-4E97-8849-496BF711FC12}.Release|x64.ActiveCfg = Release|x64
+		{B77F6AFE-2CEC-4E97-8849-496BF711FC12}.Release|x64.Build.0 = Release|x64
+		{B77F6AFE-2CEC-4E97-8849-496BF711FC12}.Release|x86.ActiveCfg = Release|Win32
+		{B77F6AFE-2CEC-4E97-8849-496BF711FC12}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B5C8AA60-3DB6-4C91-B3E6-28FE677143C9}
+	EndGlobalSection
+EndGlobal
