@@ -7,6 +7,7 @@
 #include "fileData.h"
 #include <string.h>
 
+
 void lerDadosDoFicheiro(pFileData dados) {
     FILE *fp;
 
@@ -16,13 +17,13 @@ void lerDadosDoFicheiro(pFileData dados) {
 
 }
 
-void escreveDadosDoFicheiro(pFileData dados) {
+void escreveDadosNoFicheiro(pFileData dados) {
     FILE *fp;
 
     fp = fopen(FILENAME, "wb");
 
     size_t a = fwrite(dados, sizeof(fileData), 1, fp);
-    printf("escreveDadosDoFicheiro escrito: %d", a);
+    printf("escreveDadosNoFicheiro escrito: %d", a);
 }
 
 void recebeDadosDeAluno(paluno novoAluno) {
@@ -96,7 +97,7 @@ void ficheiroBinario(){
     dados.ucs[4].id_curricular = 5;
     strcpy(dados.ucs[4].nome, "AA");
 
-    escreveDadosDoFicheiro(&dados);
+    escreveDadosNoFicheiro(&dados);
 
 
     fileData dadosLidos;
@@ -114,7 +115,6 @@ int main() {
     int tam = 100;
     fileData dados;
     memset(&dados, '\0', sizeof(fileData));
-    ucurricular ucs[100];
 
     lerDadosDoFicheiro(&dados);
 
@@ -128,7 +128,7 @@ int main() {
                         flag = 0;
                         break;
                     }
-                    printf("1- Consultar Curso\n2- Consultar UC\n3- Consultar Aluno\n9- Voltar\n0- Sair\n");
+                    printf("1- Consultar Curso\n2- Consultar UC\n3- Consultar Aluno\n4- Lista alunos \n5- Lista Curso \n9- Voltar\n0- Sair\n");
                     scanf("%d", &opt2);
                     switch (opt2) {
                         case 1:
@@ -138,8 +138,10 @@ int main() {
                             getchar();
                             break;
                         case 2: {
+                            ucurricular ucs[100];
+                            memset(ucs, '\0', 100 * sizeof(ucurricular));
                             printf("Insira termo de pesquisa\n");
-                            char termo[100];
+                            char termo[100] = {0};
                             scanf("%s", termo);
                             encontraCurricularPorNome(dados.ucs, tam, termo, ucs);
 
@@ -148,13 +150,29 @@ int main() {
                             getchar();
                             break;
                         }
-                        case 3:
+                        case 3: {
                             consultaAluno(dados.alunos, tam);
                             printf("Consulta de aluno:\n");
                             printf("Prima tecla para voltar...\n");
                             getchar();
                             getchar();
                             break;
+                        }
+                        case 4:{
+                            printf("Lista de alunos\n");
+                            listaAlunos(dados.alunos, tam);
+                            break;
+                        }
+                        case 5:{
+                            printf("Lista de UCs\n");
+                            listaUcs(dados.ucs, tam);
+                            break;
+                        }
+                        case 6:{
+                            printf("Lista de Cursos\n");
+                            listaCursos(dados.cursos, tam);
+                            break;
+                        }
                         case 9:
                             flag = 1;
                             break;
@@ -186,7 +204,6 @@ int main() {
                                 scanf("%d", &optadd);
                                 switch (optadd) {
                                     case 1: {
-
                                         aluno novoAluno;
                                         printf("Insira dados do aluno novo\n");
                                         recebeDadosDeAluno(&novoAluno);
@@ -197,13 +214,6 @@ int main() {
                                         getchar();
                                         break;
                                     }
-                                    case 2:
-                                        //addProfessor();
-                                        printf("Adicionar professor:\n");
-                                        printf("Prima tecla para voltar...\n");
-                                        getchar();
-                                        getchar();
-                                        break;
                                     case 9:
                                         flag = 1;
                                         break;
@@ -223,7 +233,7 @@ int main() {
                             scanf("%d", &novoAluno.n);
 
                             removeAluno(dados.alunos, tam, &novoAluno);
-
+                            escreveDadosNoFicheiro(&dados);
                             printf("Prima tecla para voltar...\n");
                             getchar();
                             getchar();
@@ -236,7 +246,7 @@ int main() {
                             aluno novoAluno;
                             recebeDadosDeAluno(&novoAluno);
                             editAluno(dados.alunos, tam,&novoAluno);
-                            printf("Prima tecla para voltar...\n");
+                            escreveDadosNoFicheiro(&dados);
                             getchar();
                             getchar();
                             break;
@@ -263,4 +273,5 @@ int main() {
         }
     } while (opt1 != 0);
 }
+
 

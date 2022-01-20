@@ -15,6 +15,7 @@ void listaCursos(pcurso aux, int size) {
     for (int i = 0; i < size; i++) {
         if (aux[i].id != 0) {
             listaCurso(&aux[i]);
+            printf("\n");
         } else {
             break;
         }
@@ -42,7 +43,7 @@ void consultaCurso(pcurso listaCursos, int size) {
     if (a != NULL) {
         printf("Encontrou Curso\n");
         listaCurso(a);
-    }else{
+    } else {
         printf("Nao encontrou Curso\n");
     }
 }

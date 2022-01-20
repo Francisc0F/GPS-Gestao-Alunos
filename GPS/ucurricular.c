@@ -15,7 +15,7 @@ pucurricular encontraCurricularPorId(pucurricular lista, int size, int num) {
 
 void addToList(pucurricular results, pucurricular a) {
     int i = 0;
-    if(results[i].id_curricular == 0){
+    if (results[i].id_curricular == 0) {
         results[i].id_curricular = a->id_curricular;
         results[i].n_alunos = a->n_alunos;
         strcpy(results[i].nome, a->nome);
@@ -33,17 +33,15 @@ void addToList(pucurricular results, pucurricular a) {
 void encontraCurricularPorNome(pucurricular lista, int size, char *termoPesquisa, pucurricular results) {
 
     for (int i = 0; i < size; i++) {
-        int id = lista[i].id_curricular;
-
-        char *ret = strstr(termoPesquisa, "literal");
-        if (id != 0 && ret) {
+        char *ret = strstr(lista[i].nome, termoPesquisa);
+        if (ret != NULL) {
+            printf("ret %s \n", ret);
             addToList(results, &lista[i]);
-        } else {
-            break;
+            ret = NULL;
         }
     }
+    listaUcs(results, 100);
 }
-
 
 
 void listaUc(pucurricular aux) {

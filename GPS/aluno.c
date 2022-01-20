@@ -19,6 +19,7 @@ void listaAlunos(paluno aux, int size) {
     for (int i = 0; i < size; i++) {
         if (aux[i].n != 0) {
             listaAluno(&aux[i]);
+            printf("\n");
         } else {
             break;
         }
