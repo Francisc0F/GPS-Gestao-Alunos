@@ -30,8 +30,6 @@ paluno encontraAlunoPorNum(paluno lista, int size, int num) {
         int n = lista[i].n;
         if (n != 0 && n == num) {
             return &lista[i];
-        } else {
-            break;
         }
     }
     return NULL;
@@ -80,6 +78,7 @@ void removeAluno(paluno listaAlunos, int size, paluno al) {
         }
         return;
     }
+    printf("Nao foi encontrado o aluno");
 }
 
 void editAluno(paluno listaAlunos, int size, paluno novoAlunoEditado){

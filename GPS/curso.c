@@ -26,8 +26,6 @@ pcurso encontraCursoPorId(pcurso lista, int size, int num) {
         int id = lista[i].id;
         if (id != 0 && id == num) {
             return &lista[i];
-        } else {
-            break;
         }
     }
     return NULL;
@@ -44,6 +42,8 @@ void consultaCurso(pcurso listaCursos, int size) {
     if (a != NULL) {
         printf("Encontrou Curso\n");
         listaCurso(a);
+    }else{
+        printf("Nao encontrou Curso\n");
     }
 }
 

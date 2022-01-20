@@ -1,18 +1,13 @@
 
 #include "ucurricular.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 pucurricular encontraCurricularPorId(pucurricular lista, int size, int num) {
     for (int i = 0; i < size; i++) {
         int id = lista[i].id_curricular;
-
-
         if (id != 0 && id == num) {
             return &lista[i];
-        } else {
-            break;
         }
     }
     return NULL;
@@ -35,11 +30,12 @@ void addToList(pucurricular results, pucurricular a) {
     strcpy(results[i].nome, a->nome);
 }
 
-void encontraCurricularPorNome(pucurricular lista, int size, char *tmp, pucurricular results) {
+void encontraCurricularPorNome(pucurricular lista, int size, char *termoPesquisa, pucurricular results) {
+
     for (int i = 0; i < size; i++) {
         int id = lista[i].id_curricular;
 
-        char *ret = strstr(tmp, "literal");
+        char *ret = strstr(termoPesquisa, "literal");
         if (id != 0 && ret) {
             addToList(results, &lista[i]);
         } else {
@@ -49,17 +45,23 @@ void encontraCurricularPorNome(pucurricular lista, int size, char *tmp, pucurric
 }
 
 
-void consultaCurricular(pucurricular listaUnidadesCurricular, int size) {
 
-    char num[15];
-    printf("Introduza o id do curso: \n");
+void listaUc(pucurricular aux) {
+    printf("Nome: %s\n", aux->nome);
+    printf("Num alunos: %d\n", aux->n_alunos);
+    printf("id_curricular: %d\n", aux->id_curricular);
+}
 
-    scanf("%s", num);
-
-    pucurricular a = encontraCurricularPorId(listaUnidadesCurricular, size, atoi(num));
-    if (a != NULL) {
-        printf("Encontrou Curso\n");
-        listaCurso(a);
+void listaUcs(pucurricular aux, int size) {
+    for (int i = 0; i < size; i++) {
+        if (aux[i].id_curricular != 0) {
+            listaUc(&aux[i]);
+            printf("\n");
+        } else {
+            break;
+        }
     }
 }
+
+
 

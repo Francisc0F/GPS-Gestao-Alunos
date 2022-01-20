@@ -11,10 +11,12 @@ struct i {
     int n_alunos;
 };
 
-void consultaUC();
+pucurricular encontraCurricularPorId(pucurricular lista, int size, int num);
 
-void consultaCurricular(pucurricular listaUnidadesCurricular, int size);
+void encontraCurricularPorNome(pucurricular lista, int size, char *termoPesquisa, pucurricular results);
 
-void encontraCurricularPorNome(pucurricular lista, int size, char *tmp, pucurricular results);
+void listaUc(pucurricular aux);
+
+void listaUcs(pucurricular aux, int size);
 
 #endif

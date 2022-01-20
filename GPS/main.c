@@ -25,7 +25,18 @@ void escreveDadosDoFicheiro(pFileData dados) {
     printf("escreveDadosDoFicheiro escrito: %d", a);
 }
 
-/*int main(int argc, const char * argv[]) {
+void recebeDadosDeAluno(paluno novoAluno) {
+    printf("Insira nome:\n");
+    scanf("%s", novoAluno->nome);
+    printf("Insira Numero:\n");
+    scanf("%d", &novoAluno->n);
+    printf("Insira data nascimento:\n");
+    scanf("%s", novoAluno->data_nasc);
+    printf("Insira Ano:\n");
+    scanf("%d", &novoAluno->ano);
+}
+
+void ficheiroBinario(){
     fileData dados;
     memset(&dados, '\0', sizeof(fileData));
 
@@ -49,7 +60,7 @@ void escreveDadosDoFicheiro(pFileData dados) {
 
 
     dados.cursos[0].id = 1;
-    dados.cursos[0].n_alunos = 0;
+    dados.cursos[0].n_alunos = 10;
     strcpy(dados.cursos[0].nome, "ENGINF");
 
 
@@ -65,24 +76,47 @@ void escreveDadosDoFicheiro(pFileData dados) {
     dados.cursos[3].n_alunos = 5;
     strcpy(dados.cursos[3].nome, "ENGBIO");
 
+    dados.ucs[0].n_alunos = 20;
+    dados.ucs[0].id_curricular = 1;
+    strcpy(dados.ucs[0].nome, "AM1");
+
+    dados.ucs[1].n_alunos = 20;
+    dados.ucs[1].id_curricular = 2;
+    strcpy(dados.ucs[1].nome, "AM2");
+
+    dados.ucs[2].n_alunos = 2;
+    dados.ucs[2].id_curricular = 3;
+    strcpy(dados.ucs[2].nome, "GPS");
+
+    dados.ucs[3].n_alunos = 3;
+    dados.ucs[3].id_curricular = 4;
+    strcpy(dados.ucs[3].nome, "ING");
+
+    dados.ucs[4].n_alunos = 10;
+    dados.ucs[4].id_curricular = 5;
+    strcpy(dados.ucs[4].nome, "AA");
 
     escreveDadosDoFicheiro(&dados);
 
 
     fileData dadosLidos;
     lerDadosDoFicheiro(&dadosLidos);
-
+}
+/*
+int main(){
+    ficheiroBinario();
 }*/
 
-
-
-int main(int argc, const char *argv[]) {
+int main() {
 
     int opt1, opt2, opt3, optadd, skip, flag = 0;
 
     int tam = 100;
     fileData dados;
     memset(&dados, '\0', sizeof(fileData));
+    ucurricular ucs[100];
+
+    lerDadosDoFicheiro(&dados);
 
     do {
         printf("1- Consultar\n2- Editar\n0- Sair \n");
@@ -99,20 +133,23 @@ int main(int argc, const char *argv[]) {
                     switch (opt2) {
                         case 1:
                             consultaCurso(dados.cursos, tam);
-                            printf("Consulta de curso:\n");
                             printf("Prima tecla para voltar...\n");
                             getchar();
                             getchar();
                             break;
-                        case 2:
-                            consultaUC();
-                            printf("Consulta de UC:\n");
+                        case 2: {
+                            printf("Insira termo de pesquisa\n");
+                            char termo[100];
+                            scanf("%s", termo);
+                            encontraCurricularPorNome(dados.ucs, tam, termo, ucs);
+
                             printf("Prima tecla para voltar...\n");
                             getchar();
                             getchar();
                             break;
+                        }
                         case 3:
-                            consultaAluno();
+                            consultaAluno(dados.alunos, tam);
                             printf("Consulta de aluno:\n");
                             printf("Prima tecla para voltar...\n");
                             getchar();
@@ -148,14 +185,18 @@ int main(int argc, const char *argv[]) {
                                 printf("1-Aluno\n2- Professor\n9- Voltar\n0- Sair\n");
                                 scanf("%d", &optadd);
                                 switch (optadd) {
-                                    case 1:
-                                        addAluno();
-                                        printf("Adicionar aluno:\n");
+                                    case 1: {
+
+                                        aluno novoAluno;
+                                        printf("Insira dados do aluno novo\n");
+                                        recebeDadosDeAluno(&novoAluno);
+                                        addAluno(dados.alunos, tam, &novoAluno);
+                                        printf("Aluno adicionado\n");
                                         printf("Prima tecla para voltar...\n");
                                         getchar();
                                         getchar();
                                         break;
-
+                                    }
                                     case 2:
                                         //addProfessor();
                                         printf("Adicionar professor:\n");
@@ -175,20 +216,32 @@ int main(int argc, const char *argv[]) {
                                 }
                             } while (optadd != 0);
                             break;
-                        case 2:
-                            removeAluno();
+                        case 2: {
                             printf("Remover aluno:\n");
+                            aluno novoAluno;
+                            printf("Insira num do aluno:\n");
+                            scanf("%d", &novoAluno.n);
+
+                            removeAluno(dados.alunos, tam, &novoAluno);
+
                             printf("Prima tecla para voltar...\n");
                             getchar();
                             getchar();
                             break;
-                        case 3:
-                            editAluno();
+                        }
+
+                        case 3: {
                             printf("Editar aluno:\n");
+                            printf("Insira dados do aluno a editar:\n");
+                            aluno novoAluno;
+                            recebeDadosDeAluno(&novoAluno);
+                            editAluno(dados.alunos, tam,&novoAluno);
                             printf("Prima tecla para voltar...\n");
                             getchar();
                             getchar();
                             break;
+                        }
+
                         case 9:
                             flag = 1;
                             break;
